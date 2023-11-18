@@ -1,14 +1,16 @@
 package utils
 
 import (
-	"github.com/furkanadiiguzel/golang-bookstore/pkg/controllers"
-	"github.com/gorilla/mux"
+	"encoding/json"
+	"io"
+	"net/http"
 )
 
-var RegisterBookStoreRoutes = func(router *mux.Router) {
-	router.HandleFunc("/books", controllers.GetBooks).Methods("GET")
-	router.HandleFunc("/books/{id}", controllers.GetBook).Methods("GET")
-	router.HandleFunc("/books", controllers.CreateBook).Methods("POST")
-	router.HandleFunc("/books/{id}", controllers.UpdateBook).Methods("PUT")
-	router.HandleFunc("/books/{id}", controllers.DeleteBook).Methods("DELETE")
+func ParseBody(r *http.Request, x interface{}) {
+	if body, err := io.ReadAll(r.Body); err == nil {
+		if err := json.Unmarshal([]byte(body), x); err != nil {
+			return
+		}
+	}
+
 }
