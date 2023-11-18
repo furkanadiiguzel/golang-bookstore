@@ -20,7 +20,7 @@ func init() {
 	db.AutoMigrate(&Book{})
 }
 
-func (b *Book) CreateBook() *Book {
+func (b *Book) CreateBooks() *Book {
 	db.NewRecord(b)
 	db.Create(&b)
 	return b
