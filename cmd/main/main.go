@@ -12,6 +12,7 @@ import (
 func main() {
 	router := mux.NewRouter()
 	routes.RegisterBookStoreRoutes(router)
-	log.Fatal(http.ListenAndServe(":8000", router))
+	http.Handle("/", router)
+	log.Fatal(http.ListenAndServe(":8080", router))
 
 }
